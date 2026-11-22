@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidypptsdm <a href="https://tony2015116.github.io/tidypptsdm/"><img src="man/figures/logo.svg" align="right" height="120" alt="tidypptsdm website" /></a>
+# tidypptsdm <a href="https://tony2015116.github.io/tidypptsdm/"><img src="man/figures/logo.png" align="right" width="120" height="139" alt="tidypptsdm website" /></a>
 
 <!-- badges: start -->
 
