@@ -170,14 +170,14 @@ ADG、ADFI、FCR 也用 tidypptsda。tidypptsdm 只管测定期间的每日监�
 <h2 id="输入数据">2. 输入数据<a class="anchor" aria-label="anchor" href="#%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE"></a>
 </h2>
 <p>所有函数都接受以下任一种输入，内部会自动调用
-<code><a href="https://tony2015116.github.io/tidypptsda/reference/read_station.html" class="external-link">read_station()</a></code> 和 <code><a href="https://tony2015116.github.io/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits()</a></code>：</p>
+<code><a href="https://mguo.dpdns.org/tidypptsda/reference/read_station.html" class="external-link">read_station()</a></code> 和 <code><a href="https://mguo.dpdns.org/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits()</a></code>：</p>
 <ul>
 <li>导出文件所在的<strong>文件夹</strong>或文件路径，如
 <code>run_monitor("D:/nedap/exports")</code>；</li>
 <li>已读入 R 的原始导出数据，如示例数据
-<code><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">tidypptsda::nedap</a></code>、<code><a href="https://tony2015116.github.io/tidypptsda/reference/fire.html" class="external-link">tidypptsda::fire</a></code>；</li>
+<code><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">tidypptsda::nedap</a></code>、<code><a href="https://mguo.dpdns.org/tidypptsda/reference/fire.html" class="external-link">tidypptsda::fire</a></code>；</li>
 <li>
-<code><a href="https://tony2015116.github.io/tidypptsda/reference/read_station.html" class="external-link">read_station()</a></code> 或 <code><a href="https://tony2015116.github.io/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits()</a></code>
+<code><a href="https://mguo.dpdns.org/tidypptsda/reference/read_station.html" class="external-link">read_station()</a></code> 或 <code><a href="https://mguo.dpdns.org/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits()</a></code>
 的结果。</li>
 </ul>
 <p>预处理后两种测定站的列名和单位一致：采食量 g、体重 kg（0
@@ -191,7 +191,7 @@ tidypptsda 的<a href="https://tony2015116.github.io/tidypptsda/articles/data-zh
 <h2 id="一次巡检">3. 一次巡检<a class="anchor" aria-label="anchor" href="#%E4%B8%80%E6%AC%A1%E5%B7%A1%E6%A3%80"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Preparing NEDAP visits</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;   Visits read                                31,863</span></span>
@@ -271,7 +271,7 @@ tidypptsda 的<a href="https://tony2015116.github.io/tidypptsda/articles/data-zh
 <p>示例数据最后一天一切正常。为了演示，去掉测定站 102
 最后一天的全部记录和一头猪最后两天的记录：</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tony2015116.github.io/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mguo.dpdns.org/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">date</span><span class="op">)</span></span>
 <span><span class="va">pig</span> <span class="op">&lt;-</span> <span class="va">v</span><span class="op">[</span><span class="va">location</span> <span class="op">==</span> <span class="st">"101"</span> <span class="op">&amp;</span> <span class="va">identified</span>, <span class="va">responder</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">spoiled</span> <span class="op">&lt;-</span> <span class="va">v</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="va">location</span> <span class="op">==</span> <span class="st">"102"</span> <span class="op">&amp;</span> <span class="va">date</span> <span class="op">==</span> <span class="va">end</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="op">(</span><span class="va">responder</span> <span class="op">==</span> <span class="va">pig</span> <span class="op">&amp;</span> <span class="va">date</span> <span class="op">&gt;=</span> <span class="va">end</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span></span>

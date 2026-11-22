@@ -141,8 +141,8 @@ from day to day. It answers the questions of the daily round: is every
 station recording, are the transponders read, does every pig still eat,
 and how did feed intake and body weight develop over the last days?</p>
 <p>The data are read and prepared with <a href="https://tony2015116.github.io/tidypptsda/" class="external-link">tidypptsda</a>:
-<code><a href="https://tony2015116.github.io/tidypptsda/reference/read_station.html" class="external-link">read_station()</a></code> reads NEDAP or FIRE exports and
-<code><a href="https://tony2015116.github.io/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits()</a></code> turns them into one standard visit table
+<code><a href="https://mguo.dpdns.org/tidypptsda/reference/read_station.html" class="external-link">read_station()</a></code> reads NEDAP or FIRE exports and
+<code><a href="https://mguo.dpdns.org/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits()</a></code> turns them into one standard visit table
 (feed intake in g, body weight in kg, duration in seconds, unidentified
 visits kept with <code>identified = FALSE</code>, pigs moved to another
 station resolved). Both functions are re-exported, so
@@ -150,7 +150,7 @@ station resolved). Both functions are re-exported, so
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tony2015116.github.io/tidypptsdm/">tidypptsdm</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">7</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">7</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">mon</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">NEDAP monitor: 2024-05-19 to 2024-05-25</span> <span style="color: #00BBBB;">─────────────────────────────────────</span></span></span>
@@ -170,8 +170,8 @@ station resolved). Both functions are re-exported, so
 tidypptsda;</li>
 <li>
 <strong>input</strong>: <code>as_visits()</code> accepts a folder or
-files, a raw export, the result of <code><a href="https://tony2015116.github.io/tidypptsda/reference/read_station.html" class="external-link">read_station()</a></code> or of
-<code><a href="https://tony2015116.github.io/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits()</a></code>, and always returns a copy, so user objects
+files, a raw export, the result of <code><a href="https://mguo.dpdns.org/tidypptsda/reference/read_station.html" class="external-link">read_station()</a></code> or of
+<code><a href="https://mguo.dpdns.org/tidypptsda/reference/prep_visits.html" class="external-link">prep_visits()</a></code>, and always returns a copy, so user objects
 are never modified;</li>
 <li>
 <strong>window</strong>: <code>monitor_window()</code> turns
@@ -195,7 +195,7 @@ goes to <code><a href="../reference/write_monitor_report.html">write_monitor_rep
 day in the data; when that is today, it is the day before, because an
 export taken during the day has an incomplete last day.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Preparing NEDAP visits</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;   Visits read                                31,863</span></span>
@@ -238,7 +238,7 @@ stopped recording, or a pig that stopped eating, visible.</p>
 <h3 id="stations">Stations<a class="anchor" aria-label="anchor" href="#stations"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">st</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/monitor_stations.html">monitor_stations</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">7</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">st</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/monitor_stations.html">monitor_stations</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">7</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">st</span></span>
 <span><span class="co">#&gt;     location       date n_pigs n_visits n_unidentified pct_unidentified</span></span>
 <span><span class="co">#&gt;       &lt;char&gt;     &lt;Date&gt;  &lt;int&gt;    &lt;int&gt;          &lt;int&gt;            &lt;num&gt;</span></span>
@@ -285,7 +285,7 @@ stopped recording, or a pig that stopped eating, visible.</p>
 <p>A house is a group of stations, named by the first
 <code>house_width</code> characters of the station ID.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/monitor_houses.html">monitor_houses</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">5</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/monitor_houses.html">monitor_houses</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, days <span class="op">=</span> <span class="fl">5</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     house       date n_stations n_pigs n_visits feed_kg feed_per_pig_kg</span></span>
 <span><span class="co">#&gt;    &lt;char&gt;     &lt;Date&gt;      &lt;int&gt;  &lt;int&gt;    &lt;int&gt;   &lt;num&gt;           &lt;num&gt;</span></span>
 <span><span class="co">#&gt; 1:      1 2024-05-21          2     28      444  94.448           3.362</span></span>
@@ -305,7 +305,7 @@ stopped recording, or a pig that stopped eating, visible.</p>
 <h3 id="pigs">Pigs<a class="anchor" aria-label="anchor" href="#pigs"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/monitor_pigs.html">monitor_pigs</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/fire.html" class="external-link">fire</a></span>, days <span class="op">=</span> <span class="fl">7</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">pigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/monitor_pigs.html">monitor_pigs</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/fire.html" class="external-link">fire</a></span>, days <span class="op">=</span> <span class="fl">7</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">pigs</span><span class="op">[</span><span class="va">status</span> <span class="op">!=</span> <span class="st">"ok"</span><span class="op">]</span></span>
 <span><span class="co">#&gt;    location responder       date n_visits feed_kg occupation_min weight_kg</span></span>
 <span><span class="co">#&gt;      &lt;char&gt;    &lt;char&gt;     &lt;Date&gt;    &lt;int&gt;   &lt;num&gt;          &lt;num&gt;     &lt;num&gt;</span></span>
@@ -326,7 +326,7 @@ stopped recording, or a pig that stopped eating, visible.</p>
 <h3 id="hours-of-the-day">Hours of the day<a class="anchor" aria-label="anchor" href="#hours-of-the-day"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/monitor_hours.html">monitor_hours</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/monitor_hours.html">monitor_hours</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/wide_table.html">wide_table</a></span><span class="op">(</span><span class="va">h</span>, <span class="st">"n_visits"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Key: &lt;location&gt;</span></span>
 <span><span class="co">#&gt;    location    00    01    02    03    04    05    06    07    08    09    10</span></span>
@@ -355,7 +355,7 @@ stopped recording, or a pig that stopped eating, visible.</p>
 in rows and the days (or hours) in columns, as in the Excel
 workbook.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/wide_table.html">wide_table</a></span><span class="op">(</span><span class="va">mon</span><span class="op">$</span><span class="va">stations</span>, <span class="st">"n_visits"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Key: &lt;location&gt;</span></span>
 <span><span class="co">#&gt;    location 05-19 05-20 05-21 05-22 05-23 05-24 05-25 total</span></span>
@@ -420,17 +420,17 @@ plots;</li>
 hour of the last day.</li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_monitor.html">plot_monitor</a></span><span class="op">(</span><span class="va">mon</span>, <span class="st">"intake"</span><span class="op">)</span><span class="op">$</span><span class="va">plot</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <p><img src="get-started_files/figure-html/examples-plot_monitor-1.png" class="r-plt" alt="" width="700"></p>
 <div class="section level3">
 <h3 id="saving-plots">Saving plots<a class="anchor" aria-label="anchor" href="#saving-plots"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"monitor_plots"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/save_monitor_plots.html">save_monitor_plots</a></span><span class="op">(</span><span class="fu"><a href="../reference/plot_monitor.html">plot_monitor</a></span><span class="op">(</span><span class="va">mon</span>, <span class="st">"trend"</span><span class="op">)</span>, <span class="va">dir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Saved 2 of 2 plots to <span style="color: #0000BB;">/tmp/RtmptAdiZM/monitor_plots</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Saved 2 of 2 plots to <span style="color: #0000BB;">/tmp/Rtmpfsvn2g/monitor_plots</span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">dir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -443,20 +443,20 @@ overview page with the alerts and a table of all stations, then one page
 per station with its plots and its pigs. Turn the pages with the arrow
 keys and type a pig ID to jump to its station.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"monitor_report"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_monitor_report.html">write_monitor_report</a></span><span class="op">(</span><span class="va">mon</span>, <span class="va">dir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Report of 2 stations written to <span style="color: #0000BB;">/tmp/RtmptAdiZM/monitor_report/index.html</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Report of 2 stations written to <span style="color: #0000BB;">/tmp/Rtmpfsvn2g/monitor_report/index.html</span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">dir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="excel-workbook-and-csv-files">Excel workbook and CSV files<a class="anchor" aria-label="anchor" href="#excel-workbook-and-csv-files"></a>
 </h2>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/run_monitor.html">run_monitor</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"monitor_tables"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/write_monitor_tables.html">write_monitor_tables</a></span><span class="op">(</span><span class="va">mon</span>, <span class="va">dir</span>, format <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Wrote 6 CSV files to <span style="color: #0000BB;">/tmp/RtmptAdiZM/monitor_tables</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Wrote 6 CSV files to <span style="color: #0000BB;">/tmp/Rtmpfsvn2g/monitor_tables</span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">dir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -471,15 +471,15 @@ Linux and macOS the function prints the line to add with
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"exports"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">folder</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://tony2015116.github.io/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">folder</span>, <span class="st">"nedap.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span><span class="fu">tidypptsda</span><span class="fu">::</span><span class="va"><a href="https://mguo.dpdns.org/tidypptsda/reference/nedap.html" class="external-link">nedap</a></span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">folder</span>, <span class="st">"nedap.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"monitor_runs"</span><span class="op">)</span></span>
 <span><span class="va">script</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/schedule_monitor.html">schedule_monitor</a></span><span class="op">(</span><span class="va">folder</span>, <span class="va">out</span>, days <span class="op">=</span> <span class="fl">7</span>, register <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Monitor script written to <span style="color: #0000BB;">/tmp/RtmptAdiZM/monitor_runs/tidypptsdm_monitor.R</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Monitor script written to <span style="color: #0000BB;">/tmp/Rtmpfsvn2g/monitor_runs/tidypptsdm_monitor.R</span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">script</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # Written by tidypptsdm::schedule_monitor() on 2026-10-31 06:38</span></span>
+<span><span class="co">#&gt; # Written by tidypptsdm::schedule_monitor() on 2026-11-22 01:52</span></span>
 <span><span class="co">#&gt; # Daily monitor of the testing stations: edit the settings below if needed.</span></span>
-<span><span class="co">#&gt; mon &lt;- tidypptsdm::run_monitor("/tmp/RtmptAdiZM/exports", days = 7)</span></span>
-<span><span class="co">#&gt; out &lt;- file.path("/tmp/RtmptAdiZM/monitor_runs", format(mon$settings$end_date))</span></span>
+<span><span class="co">#&gt; mon &lt;- tidypptsdm::run_monitor("/tmp/Rtmpfsvn2g/exports", days = 7)</span></span>
+<span><span class="co">#&gt; out &lt;- file.path("/tmp/Rtmpfsvn2g/monitor_runs", format(mon$settings$end_date))</span></span>
 <span><span class="co">#&gt; tidypptsdm::write_monitor_report(mon, out)</span></span>
 <span><span class="co">#&gt; tidypptsdm::write_monitor_tables(mon, out, format = "xlsx")</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">folder</span>, <span class="va">out</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
