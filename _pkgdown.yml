@@ -5,13 +5,20 @@ template:
 navbar:
   bg: light
   structure:
-    left:  [getstarted, reference, articles, news, python]
+    left:  [getstarted, reference, articles, cheatsheet, news, python]
     right: [github, lightswitch]
 
   components:
     getstarted:
       text: Get started
       href: articles/get-started.html
+    cheatsheet:
+      text: Cheatsheet
+      menu:
+      - text: 中文
+        href: cheatsheet.html
+      - text: English
+        href: cheatsheet-en.html
     python:
       text: Python 版
       icon: fab fa-python

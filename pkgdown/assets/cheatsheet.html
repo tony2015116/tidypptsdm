@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tidypptsdm 速查表</title>
+<style>
+  :root {
+    --ink: #1f2933;
+    --muted: #5f6b7a;
+    --line: #d9dee5;
+    --paper: #ffffff;
+    --bg: #f4f6f8;
+    --accent: #2780e3;
+    --c-read: #2780e3;
+    --c-table: #0f8a5f;
+    --c-plot: #c46a00;
+    --c-run: #8e44ad;
+    --c-out: #475569;
+    --c-alert: #b42318;
+    --code-bg: #f1f4f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e6e9ee; --muted: #a3adba; --line: #3a4350; --paper: #1c2128;
+      --bg: #13171c; --code-bg: #262d36; --accent: #5aa2f0;
+      --c-read: #5aa2f0; --c-table: #3cc08f; --c-plot: #f0a347;
+      --c-run: #c08ae0; --c-out: #a3adba; --c-alert: #f07a70;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 13px/1.5 -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+          "Noto Sans CJK SC", "Source Han Sans SC", "Segoe UI", sans-serif;
+  }
+  code, pre { font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; }
+  code { background: var(--code-bg); padding: 0 3px; border-radius: 3px; font-size: 0.92em; }
+  pre {
+    background: var(--code-bg); margin: 6px 0; padding: 7px 9px; border-radius: 5px;
+    font-size: 11.5px; line-height: 1.45; overflow-x: auto; white-space: pre;
+  }
+  pre code { background: none; padding: 0; }
+  .c { color: var(--muted); }
+  a { color: var(--accent); }
+
+  header {
+    max-width: 1400px; margin: 0 auto; padding: 18px 16px 6px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px;
+  }
+  header h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; }
+  header h1 span { color: var(--accent); }
+  header p { margin: 0; color: var(--muted); }
+  header nav { margin-left: auto; display: flex; gap: 14px; }
+
+  .flow {
+    max-width: 1400px; margin: 6px auto 4px; padding: 0 16px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+  }
+  .flow .step {
+    background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--k);
+    border-radius: 6px; padding: 4px 9px; font-size: 12px;
+  }
+  .flow .step b { display: block; font-family: Menlo, Consolas, monospace; font-size: 12px; }
+  .flow .arrow { color: var(--muted); font-size: 15px; }
+  .flow .note { color: var(--muted); font-size: 12px; margin-left: 6px; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 8px 16px 24px;
+    columns: 3 340px; column-gap: 14px;
+  }
+  section {
+    break-inside: avoid; background: var(--paper); border: 1px solid var(--line);
+    border-radius: 8px; margin: 0 0 14px; padding: 10px 12px 8px;
+    border-left: 5px solid var(--k);
+  }
+  section h2 {
+    margin: 0 0 6px; font-size: 15px; color: var(--k);
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  section h2 small { color: var(--muted); font-weight: normal; font-size: 12px; }
+  section h3 { margin: 8px 0 3px; font-size: 12.5px; }
+  section p { margin: 4px 0; }
+  ul { margin: 3px 0; padding-left: 17px; }
+  li { margin: 1px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 4px 0; font-size: 12px; }
+  th, td { text-align: left; padding: 2px 5px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  td:first-child { white-space: nowrap; }
+  .swatch { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: 0; }
+  .x { display: inline-block; width: 10px; text-align: center; color: #666; font-weight: bold; margin-right: 3px; }
+  .dash { display: inline-block; width: 16px; border-top: 2px dashed; vertical-align: 3px; margin-right: 3px; }
+  .solid { display: inline-block; width: 16px; border-top: 2px solid; vertical-align: 3px; margin-right: 3px; }
+  .tag { display: inline-block; padding: 0 5px; border-radius: 3px; font-size: 11px; border: 1px solid var(--line); }
+  .k-read { --k: var(--c-read); } .k-table { --k: var(--c-table); } .k-plot { --k: var(--c-plot); }
+  .k-run { --k: var(--c-run); } .k-out { --k: var(--c-out); } .k-alert { --k: var(--c-alert); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 0 16px 24px; color: var(--muted); font-size: 12px; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 22px; }
+    header nav { margin-left: 0; }
+    .flow .arrow { display: none; }
+  }
+  @media print {
+    @page { size: A4 landscape; margin: 8mm; }
+    body { background: #fff; font-size: 10.5px; }
+    header nav, .noprint { display: none; }
+    main { columns: 3; column-gap: 8px; padding: 4px 0; max-width: none; }
+    header, .flow, footer { max-width: none; padding-left: 0; padding-right: 0; }
+    section { margin-bottom: 8px; padding: 6px 8px; }
+    pre { font-size: 9.5px; padding: 4px 6px; }
+    table { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1><span>tidypptsdm</span> 速查表</h1>
+  <p>种猪性能测定站（NEDAP / FIRE）每日巡检：测定站、栋、猪、每小时 → 警报 → HTML 报告和 Excel → 每天定时运行</p>
+  <nav class="noprint">
+    <a href="index.html">网站首页</a>
+    <a href="articles/tidypptsdm-zh.html">快速入门</a>
+    <a href="reference/index.html">函数文档</a>
+    <a href="cheatsheet-en.html" lang="en">English</a>
+    <a href="javascript:window.print()">打印 / 存为 PDF</a>
+  </nav>
+</header>
+
+<div class="flow" aria-label="巡检流程">
+  <div class="step" style="--k: var(--c-read)"><b>导出文件夹</b>NEDAP / FIRE</div><span class="arrow">→</span>
+  <div class="step" style="--k: var(--c-table)"><b>run_monitor()</b>最近 7 天的日表</div><span class="arrow">→</span>
+  <div class="step" style="--k: var(--c-alert)"><b>mon$alerts</b>最后一天的警报</div><span class="arrow">→</span>
+  <div class="step" style="--k: var(--c-plot)"><b>plot_monitor()</b>每站一张图</div><span class="arrow">→</span>
+  <div class="step" style="--k: var(--c-out)"><b>write_monitor_report() / write_monitor_tables()</b>HTML 报告、Excel</div><span class="arrow">→</span>
+  <div class="step" style="--k: var(--c-run)"><b>schedule_monitor()</b>每天定时运行</div>
+  <span class="note">读取和预处理来自 tidypptsda；测定结束后的 ADG、ADFI、FCR 也用 tidypptsda</span>
+</div>
+
+<main>
+
+<section class="k-read">
+  <h2>安装与一次巡检</h2>
+<pre><code><span class="c"># install.packages("pak")</span>
+pak::pak("tony2015116/tidypptsdm")
+library(tidypptsdm)
+
+mon <- run_monitor("D:/nedap/exports", days = 7)
+mon$alerts               <span class="c"># 最后一天的警报</span>
+out <- file.path("D:/nedap/monitor",
+                 format(mon$settings$end_date))
+write_monitor_report(mon, out, open = TRUE)
+write_monitor_tables(mon, out)  <span class="c"># monitor.xlsx</span></code></pre>
+  <p>示例数据：<code>tidypptsda::nedap</code>、<code>tidypptsda::fire</code>。</p>
+</section>
+
+<section class="k-read">
+  <h2>输入数据 <small>data =</small></h2>
+  <p>所有函数都接受以下任一种，内部自动调用 <code>read_station()</code> 和 <code>prep_visits()</code>：</p>
+  <ul>
+    <li>导出文件所在的<b>文件夹</b>或文件路径；</li>
+    <li>已读入 R 的原始导出数据（如 <code>tidypptsda::nedap</code>）；</li>
+    <li><code>read_station()</code> 或 <code>prep_visits()</code> 的结果。</li>
+  </ul>
+<pre><code><span class="c"># 列名与默认格式不同：先写格式文件再读</span>
+tidypptsda::station_format("fire", file = "fmt.txt")
+raw <- read_station("导出/", station = "fire",
+                    format = "fmt.txt")
+mon <- run_monitor(raw)</code></pre>
+  <ul>
+    <li>单位统一：采食 g、体重 kg（0 视为未称重）、时长 s；未读到耳标的访问保留为 <code>identified = FALSE</code>；转栏的猪归到正确的测定站。</li>
+    <li><code>station = "nedap"</code> / <code>"fire"</code>，默认自动判断。传入的数据不会被修改。</li>
+  </ul>
+</section>
+
+<section class="k-read">
+  <h2>监控窗口 <small>run_monitor()</small></h2>
+<pre><code>run_monitor(data, days = 7, end_date = NULL,
+            house_width = 1, low_feed_kg = 0.5,
+            max_unidentified_pct = 5,
+            max_feed_drop_pct = 30, iqr_k = 1.5,
+            station = NULL, verbose = 1)</code></pre>
+  <ul>
+    <li>窗口 = 截至 <code>end_date</code> 的 <code>days</code> 天（含首尾）。</li>
+    <li><code>end_date</code> 默认是数据的最后一天；<b>最后一天就是今天时取昨天</b>（当天数据不完整）。也可指定 <code>"2024-05-20"</code>。</li>
+    <li><code>house_width</code>：测定站编号前几个字符为栋号（<code>1</code> 时 <code>203</code> 属于栋 <code>2</code>）。</li>
+    <li><code>verbose</code>：0 不输出，1 摘要，2 详细。</li>
+  </ul>
+</section>
+
+<section class="k-table">
+  <h2>结果 <small>mon &lt;- run_monitor()</small></h2>
+  <table>
+    <tr><th>元素</th><th>内容</th></tr>
+    <tr><td><code>stations</code></td><td>每台测定站每天一行</td></tr>
+    <tr><td><code>houses</code></td><td>每栋每天一行</td></tr>
+    <tr><td><code>pigs</code></td><td>每头猪每天一行，无访问的日子也在</td></tr>
+    <tr><td><code>pig_summary</code></td><td>每头猪一行：低采食天数、无访问天数、最后一天的状态</td></tr>
+    <tr><td><code>hours</code></td><td>最后一天每台测定站每小时一行</td></tr>
+    <tr><td><code>alerts</code></td><td>最后一天的警报</td></tr>
+    <tr><td><code>visits</code></td><td>窗口内的访问记录</td></tr>
+    <tr><td><code>settings</code></td><td>参数和窗口</td></tr>
+  </table>
+  <p>窗口内<b>每个单位每天都有一行</b>，没有访问时计数为 0、其余为 <code>NA</code>，停机的站、不吃料的猪不会“消失”。列名后缀即单位：<code>_kg</code>、<code>_h</code>、<code>_min</code>、<code>pct_</code>（%）、<code>n_</code>（计数）。</p>
+</section>
+
+<section class="k-table">
+  <h2>日表 <small>单独计算</small></h2>
+<pre><code>monitor_stations(data, days = 7, end_date = NULL,
+                 iqr_k = 1.5)
+monitor_houses(data, days = 7, house_width = 1)
+monitor_pigs(data, days = 7, low_feed_kg = 0.5)
+monitor_hours(data, date = NULL)   <span class="c"># 0–23 时</span></code></pre>
+  <table>
+    <tr><th>测定站的列</th><th>含义</th></tr>
+    <tr><td><code>n_pigs</code></td><td>有识别访问的猪数</td></tr>
+    <tr><td><code>n_visits</code></td><td>全部访问（含未识别）</td></tr>
+    <tr><td><code>pct_unidentified</code></td><td>未读到耳标的访问 %</td></tr>
+    <tr><td><code>occupation_h</code></td><td>测定站被占用的时间</td></tr>
+    <tr><td><code>feed_kg</code> / <code>feed_per_pig_kg</code></td><td>采食量 / 头均采食量</td></tr>
+    <tr><td><code>weight_kg</code></td><td>各猪当天体重中位数的平均</td></tr>
+    <tr><td><code>pct_weight_outlier</code></td><td>超出 Tukey 界限（<code>iqr_k</code>）的体重 %</td></tr>
+  </table>
+  <p>猪的 <code>status</code>：<span class="tag">ok</span> <span class="tag">low_feed</span>（&lt; <code>low_feed_kg</code>）<span class="tag">no_visit</span>。窗口前 14 天内有访问的测定站也会列出，停机的站显示两周。</p>
+</section>
+
+<section class="k-table">
+  <h2>宽表 <small>wide_table(x, value)</small></h2>
+<pre><code>wide_table(mon$stations, "feed_kg")
+wide_table(mon$pigs, "feed_kg")</code></pre>
+  <p>把日表的一列变成“单位 × 日期”的宽表，和 Excel 里看到的一样；计数、kg、时间类的列加 <code>total</code>，其余加 <code>mean</code>。</p>
+</section>
+
+<section class="k-alert">
+  <h2>警报 <small>mon$alerts</small></h2>
+  <table>
+    <tr><th>type</th><th>级别</th><th>条件（默认）</th></tr>
+    <tr><td><code>station_down</code></td><td><span class="tag">danger</span></td><td>测定站一整天没有任何访问</td></tr>
+    <tr><td><code>pig_no_visit</code></td><td><span class="tag">danger</span></td><td>窗口内出现过的猪当天没有访问</td></tr>
+    <tr><td><code>unidentified</code></td><td><span class="tag">warning</span></td><td>未识别访问 &gt; <code>max_unidentified_pct</code> = 5%</td></tr>
+    <tr><td><code>feed_drop</code></td><td><span class="tag">warning</span></td><td>采食量比前几天平均低 &gt; <code>max_feed_drop_pct</code> = 30%</td></tr>
+    <tr><td><code>pig_low_feed</code></td><td><span class="tag">warning</span></td><td>猪当天采食 &lt; <code>low_feed_kg</code> = 0.5 kg</td></tr>
+  </table>
+  <ul>
+    <li>列：<code>level</code>（danger 在前）、<code>type</code>、<code>location</code>、<code>responder</code>、<code>value</code>（触发值）、<code>message</code>。</li>
+    <li>停机测定站上的猪不再逐头报警，由一条 <code>station_down</code> 说明（括号内为受影响猪数）。</li>
+  </ul>
+</section>
+
+<section class="k-plot">
+  <h2>作图 <small>plot_monitor(x, type, locations)</small></h2>
+  <table>
+    <tr><th>type</th><th>内容</th></tr>
+    <tr><td><code>"trend"</code></td><td>猪数、访问、未识别 %、占用时间、采食、头均采食和体重的逐日变化；体重带为最轻到最重的猪，无访问的日子标红</td></tr>
+    <tr><td><code>"intake"</code></td><td>堆叠柱状图，每头猪一种颜色：上图占当天总采食 %，下图采食 kg；图例标 <code>[no visit]</code>、<code>[low feed]</code></td></tr>
+    <tr><td><code>"weight"</code></td><td>每天体重的箱线图，红点在须线以外</td></tr>
+    <tr><td><code>"hours"</code></td><td>最后一天每小时的访问、占用时间、采食</td></tr>
+  </table>
+<pre><code>p <- plot_monitor(mon, "trend", locations = "102")
+p$plot[[1]]
+save_monitor_plots(p, "图", device = "png")
+<span class="c"># 文件名：station_&lt;站号&gt;_&lt;type&gt;.png</span></code></pre>
+</section>
+
+<section class="k-out">
+  <h2>HTML 报告 <small>write_monitor_report()</small></h2>
+<pre><code>write_monitor_report(mon, path, title = NULL,
+                     locations = NULL, open = TRUE)</code></pre>
+  <ul>
+    <li>写出 <code>index.html</code> 和 <code>img/</code>；文件夹可整体拷贝或压缩，离线打开。</li>
+    <li>第一页总览：最后一天的站数、猪数、访问、采食、警报，以及全部测定站和栋的表格。</li>
+    <li>之后每站一页：警报、趋势图、采食堆叠图、猪只表、体重箱线图、分小时图。</li>
+    <li><b>方向键翻页</b>；搜索框输入耳标号，跳到这头猪所在的测定站。</li>
+  </ul>
+</section>
+
+<section class="k-out">
+  <h2>Excel / CSV <small>write_monitor_tables()</small></h2>
+<pre><code><span class="c"># xlsx 需要 openxlsx 包</span>
+write_monitor_tables(mon, path)
+write_monitor_tables(mon, path, format = "csv")</code></pre>
+  <table>
+    <tr><th>红色表示</th><th>工作表</th></tr>
+    <tr><td>（长表）</td><td><code>Alerts</code>、<code>Stations</code>、<code>Houses</code>、<code>Pigs</code>、<code>Pig days</code>，原样写出</td></tr>
+    <tr><td>偏低</td><td><code>Visits</code>、<code>Feed kg</code>、<code>Feed per pig kg</code>、<code>Occupation h</code>、<code>Pig feed kg</code></td></tr>
+    <tr><td>偏高</td><td><code>Unidentified pct</code>、<code>Weight outliers pct</code></td></tr>
+  </table>
+  <p>宽表加三色色阶。CSV 写出 6 个文件（<code>monitor_alerts.csv</code> 等），带 BOM，Excel 直接打开不乱码。</p>
+</section>
+
+<section class="k-run">
+  <h2>每天定时运行 <small>schedule_monitor()</small></h2>
+<pre><code>install.packages("taskscheduleR")      <span class="c"># Windows</span>
+schedule_monitor(
+  folder  = "D:/nedap/exports",   <span class="c"># 导出文件夹</span>
+  out_dir = "D:/nedap/monitor",   <span class="c"># 每天一个子文件夹</span>
+  time = "07:30",
+  days = 7, house_width = 1)      <span class="c"># 传给 run_monitor()</span>
+<span class="c"># 删除任务</span>
+taskscheduleR::taskscheduler_delete(
+  "tidypptsdm_monitor")</code></pre>
+  <ul>
+    <li>写出脚本 <code>tidypptsdm_monitor.R</code>（在 <code>out_dir</code>，可用 <code>script_dir</code> 改），结果写到 <code>out_dir/&lt;最后一天&gt;/</code>。</li>
+    <li>Linux / macOS：打印一行 crontab，自己加进 <code>crontab -e</code>。</li>
+    <li><code>register = FALSE</code> 只写脚本，可先检查或手动 <code>source()</code>。</li>
+    <li>每次都重新读取整个文件夹；早已结束的批次可移走以加快速度。</li>
+  </ul>
+</section>
+
+<section class="k-run">
+  <h2>从 pptsdm 0.1.4 迁移</h2>
+  <table>
+    <tr><th>pptsdm</th><th>tidypptsdm</th></tr>
+    <tr><td><code>monitor_all()</code></td><td><code>run_monitor()</code> + <code>write_monitor_report()</code> + <code>write_monitor_tables()</code></td></tr>
+    <tr><td><code>fid_monitor()</code></td><td><code>plot_monitor(type = "intake")</code></td></tr>
+    <tr><td><code>station_monitor()</code></td><td><code>plot_monitor("trend")</code>、<code>("weight")</code></td></tr>
+    <tr><td><code>table_monitor()</code></td><td><code>write_monitor_tables()</code></td></tr>
+    <tr><td><code>monitor_schedule()</code></td><td><code>schedule_monitor()</code></td></tr>
+    <tr><td><code>low_feedintake()</code></td><td><code>monitor_pigs()</code> 的 <code>status</code></td></tr>
+    <tr><td><code>hour_stat()</code></td><td><code>monitor_hours()</code></td></tr>
+  </table>
+  <p>旧函数都不再保留；需要旧接口：<code>pak::pak("tony2015116/pptsdm@v0.1.4")</code>。完整对照见<a href="articles/migrate-zh.html">《迁移》</a>。</p>
+</section>
+
+</main>
+
+<footer>
+  详细说明见 <a href="articles/tidypptsdm-zh.html">快速入门</a>、<a href="articles/output-zh.html">结果说明</a>、<a href="articles/schedule-zh.html">定时运行</a>；数据读取和测定结束后的计算见 <a href="https://tony2015116.github.io/tidypptsda/">tidypptsda</a>。
+</footer>
+
+</body>
+</html>
