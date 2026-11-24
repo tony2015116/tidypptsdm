@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tidypptsdm cheatsheet</title>
+<style>
+  :root {
+    --ink: #1f2933;
+    --muted: #5f6b7a;
+    --line: #d9dee5;
+    --paper: #ffffff;
+    --bg: #f4f6f8;
+    --accent: #2780e3;
+    --c-read: #2780e3;
+    --c-table: #0f8a5f;
+    --c-plot: #c46a00;
+    --c-run: #8e44ad;
+    --c-out: #475569;
+    --c-alert: #b42318;
+    --code-bg: #f1f4f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e6e9ee; --muted: #a3adba; --line: #3a4350; --paper: #1c2128;
+      --bg: #13171c; --code-bg: #262d36; --accent: #5aa2f0;
+      --c-read: #5aa2f0; --c-table: #3cc08f; --c-plot: #f0a347;
+      --c-run: #c08ae0; --c-out: #a3adba; --c-alert: #f07a70;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 13px/1.5 -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+          "Noto Sans CJK SC", "Source Han Sans SC", "Segoe UI", sans-serif;
+  }
+  code, pre { font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; }
+  code { background: var(--code-bg); padding: 0 3px; border-radius: 3px; font-size: 0.92em; }
+  pre {
+    background: var(--code-bg); margin: 6px 0; padding: 7px 9px; border-radius: 5px;
+    font-size: 11.5px; line-height: 1.45; overflow-x: auto; white-space: pre;
+  }
+  pre code { background: none; padding: 0; }
+  .c { color: var(--muted); }
+  a { color: var(--accent); }
+
+  header {
+    max-width: 1400px; margin: 0 auto; padding: 18px 16px 6px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px;
+  }
+  header h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; }
+  header h1 span { color: var(--accent); }
+  header p { margin: 0; color: var(--muted); }
+  header nav { margin-left: auto; display: flex; gap: 14px; }
+
+  .flow {
+    max-width: 1400px; margin: 6px auto 4px; padding: 0 16px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+  }
+  .flow .step {
+    background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--k);
+    border-radius: 6px; padding: 4px 9px; font-size: 12px;
+  }
+  .flow .step b { display: block; font-family: Menlo, Consolas, monospace; font-size: 12px; }
+  .flow .arrow { color: var(--muted); font-size: 15px; }
+  .flow .note { color: var(--muted); font-size: 12px; margin-left: 6px; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 8px 16px 24px;
+    columns: 3 340px; column-gap: 14px;
+  }
+  section {
+    break-inside: avoid; background: var(--paper); border: 1px solid var(--line);
+    border-radius: 8px; margin: 0 0 14px; padding: 10px 12px 8px;
+    border-left: 5px solid var(--k);
+  }
+  section h2 {
+    margin: 0 0 6px; font-size: 15px; color: var(--k);
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  section h2 small { color: var(--muted); font-weight: normal; font-size: 12px; }
+  section h3 { margin: 8px 0 3px; font-size: 12.5px; }
+  section p { margin: 4px 0; }
+  ul { margin: 3px 0; padding-left: 17px; }
+  li { margin: 1px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 4px 0; font-size: 12px; }
+  th, td { text-align: left; padding: 2px 5px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  td:first-child { white-space: nowrap; }
+  .swatch { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: 0; }
+  .x { display: inline-block; width: 10px; text-align: center; color: #666; font-weight: bold; margin-right: 3px; }
+  .dash { display: inline-block; width: 16px; border-top: 2px dashed; vertical-align: 3px; margin-right: 3px; }
+  .solid { display: inline-block; width: 16px; border-top: 2px solid; vertical-align: 3px; margin-right: 3px; }
+  .tag { display: inline-block; padding: 0 5px; border-radius: 3px; font-size: 11px; border: 1px solid var(--line); }
+  .k-read { --k: var(--c-read); } .k-table { --k: var(--c-table); } .k-plot { --k: var(--c-plot); }
+  .k-run { --k: var(--c-run); } .k-out { --k: var(--c-out); } .k-alert { --k: var(--c-alert); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 0 16px 24px; color: var(--muted); font-size: 12px; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 22px; }
+    header nav { margin-left: 0; }
+    .flow .arrow { display: none; }
+  }
+  @media print {
+    @page { size: A4 landscape; margin: 8mm; }
+    body { background: #fff; font-size: 10.5px; }
+    header nav, .noprint { display: none; }
+    main { columns: 3; column-gap: 8px; padding: 4px 0; max-width: none; }
+    header, .flow, footer { max-width: none; padding-left: 0; padding-right: 0; }
+    section { margin-bottom: 8px; padding: 6px 8px; }
+    pre { font-size: 9.5px; padding: 4px 6px; }
+    table { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1><span>tidypptsdm</span> cheatsheet</h1>
+  <p>Daily monitoring of pig performance testing stations (NEDAP / FIRE): stations, houses, pigs and hours &rarr; alerts &rarr; HTML report and Excel &rarr; scheduled every day</p>
+  <nav class="noprint">
+    <a href="index.html">Home</a>
+    <a href="articles/get-started.html">Get started</a>
+    <a href="reference/index.html">Reference</a>
+    <a href="cheatsheet.html" lang="zh-CN">中文</a>
+    <a href="javascript:window.print()">Print / save as PDF</a>
+  </nav>
+</header>
+
+<div class="flow" aria-label="Monitoring workflow">
+  <div class="step" style="--k: var(--c-read)"><b>export folder</b>NEDAP / FIRE</div><span class="arrow">&rarr;</span>
+  <div class="step" style="--k: var(--c-table)"><b>run_monitor()</b>daily tables, last 7 days</div><span class="arrow">&rarr;</span>
+  <div class="step" style="--k: var(--c-alert)"><b>mon$alerts</b>alerts of the last day</div><span class="arrow">&rarr;</span>
+  <div class="step" style="--k: var(--c-plot)"><b>plot_monitor()</b>one plot per station</div><span class="arrow">&rarr;</span>
+  <div class="step" style="--k: var(--c-out)"><b>write_monitor_report() / write_monitor_tables()</b>HTML report, Excel</div><span class="arrow">&rarr;</span>
+  <div class="step" style="--k: var(--c-run)"><b>schedule_monitor()</b>run every day</div>
+  <span class="note">Reading and preparing come from tidypptsda, as do ADG, ADFI and FCR after the test</span>
+</div>
+
+<main>
+
+<section class="k-read">
+  <h2>Install and run once</h2>
+<pre><code><span class="c"># install.packages("pak")</span>
+pak::pak("tony2015116/tidypptsdm")
+library(tidypptsdm)
+
+mon <- run_monitor("D:/nedap/exports", days = 7)
+mon$alerts               <span class="c"># last day</span>
+out <- file.path("D:/nedap/monitor",
+                 format(mon$settings$end_date))
+write_monitor_report(mon, out, open = TRUE)
+write_monitor_tables(mon, out)  <span class="c"># monitor.xlsx</span></code></pre>
+  <p>Example data: <code>tidypptsda::nedap</code>, <code>tidypptsda::fire</code>.</p>
+</section>
+
+<section class="k-read">
+  <h2>Input <small>data =</small></h2>
+  <p>Every function accepts any of these and calls <code>read_station()</code> and <code>prep_visits()</code> itself:</p>
+  <ul>
+    <li>a <b>folder</b> or files of station exports;</li>
+    <li>raw exports already in R (e.g. <code>tidypptsda::nedap</code>);</li>
+    <li>the result of <code>read_station()</code> or <code>prep_visits()</code>.</li>
+  </ul>
+<pre><code><span class="c"># other column names: write a format file first</span>
+tidypptsda::station_format("fire", file = "fmt.txt")
+raw <- read_station("exports/", station = "fire",
+                    format = "fmt.txt")
+mon <- run_monitor(raw)</code></pre>
+  <ul>
+    <li>Units: feed g, weight kg (0 = not weighed), durations s. Visits without an ear tag are kept as <code>identified = FALSE</code>; pigs that moved are assigned to the right station.</li>
+    <li><code>station = "nedap"</code> / <code>"fire"</code>, detected by default. The input is never modified.</li>
+  </ul>
+</section>
+
+<section class="k-read">
+  <h2>Window <small>run_monitor()</small></h2>
+<pre><code>run_monitor(data, days = 7, end_date = NULL,
+            house_width = 1, low_feed_kg = 0.5,
+            max_unidentified_pct = 5,
+            max_feed_drop_pct = 30, iqr_k = 1.5,
+            station = NULL, verbose = 1)</code></pre>
+  <ul>
+    <li>Window = the <code>days</code> days ending on <code>end_date</code>, both included.</li>
+    <li><code>end_date</code> defaults to the last day of the data, or <b>yesterday when that is today</b> (today is incomplete). Or set it: <code>"2024-05-20"</code>.</li>
+    <li><code>house_width</code>: leading characters of the station ID that form the house (<code>1</code>: station <code>203</code> is in house <code>2</code>).</li>
+    <li><code>verbose</code>: 0 silent, 1 summary, 2 details.</li>
+  </ul>
+</section>
+
+<section class="k-table">
+  <h2>Result <small>mon &lt;- run_monitor()</small></h2>
+  <table>
+    <tr><th>Element</th><th>Content</th></tr>
+    <tr><td><code>stations</code></td><td>one row per station and day</td></tr>
+    <tr><td><code>houses</code></td><td>one row per house and day</td></tr>
+    <tr><td><code>pigs</code></td><td>one row per pig and day, also days without visits</td></tr>
+    <tr><td><code>pig_summary</code></td><td>one row per pig: low-feed days, no-visit days, status of the last day</td></tr>
+    <tr><td><code>hours</code></td><td>one row per station and hour of the last day</td></tr>
+    <tr><td><code>alerts</code></td><td>alerts of the last day</td></tr>
+    <tr><td><code>visits</code></td><td>visits in the window</td></tr>
+    <tr><td><code>settings</code></td><td>arguments and window</td></tr>
+  </table>
+  <p><b>Every unit has a row for every day</b> of the window: counts are 0 and other columns <code>NA</code> without visits, so idle stations and pigs that stop eating do not disappear. The suffix is the unit: <code>_kg</code>, <code>_h</code>, <code>_min</code>, <code>pct_</code> (%), <code>n_</code> (count).</p>
+</section>
+
+<section class="k-table">
+  <h2>Daily tables <small>one at a time</small></h2>
+<pre><code>monitor_stations(data, days = 7, end_date = NULL,
+                 iqr_k = 1.5)
+monitor_houses(data, days = 7, house_width = 1)
+monitor_pigs(data, days = 7, low_feed_kg = 0.5)
+monitor_hours(data, date = NULL)   <span class="c"># hours 0-23</span></code></pre>
+  <table>
+    <tr><th>Station column</th><th>Meaning</th></tr>
+    <tr><td><code>n_pigs</code></td><td>pigs with identified visits</td></tr>
+    <tr><td><code>n_visits</code></td><td>all visits, unidentified included</td></tr>
+    <tr><td><code>pct_unidentified</code></td><td>visits without an ear tag, %</td></tr>
+    <tr><td><code>occupation_h</code></td><td>time the station was occupied</td></tr>
+    <tr><td><code>feed_kg</code> / <code>feed_per_pig_kg</code></td><td>feed intake / per pig</td></tr>
+    <tr><td><code>weight_kg</code></td><td>mean of the pigs' daily median weights</td></tr>
+    <tr><td><code>pct_weight_outlier</code></td><td>weights outside the Tukey fences (<code>iqr_k</code>), %</td></tr>
+  </table>
+  <p>Pig <code>status</code>: <span class="tag">ok</span> <span class="tag">low_feed</span> (&lt; <code>low_feed_kg</code>) <span class="tag">no_visit</span>. Stations with visits in the 14 days before the window are listed too, so a station that stopped shows for two weeks.</p>
+</section>
+
+<section class="k-table">
+  <h2>Wide tables <small>wide_table(x, value)</small></h2>
+<pre><code>wide_table(mon$stations, "feed_kg")
+wide_table(mon$pigs, "feed_kg")</code></pre>
+  <p>One column of a daily table as a unit &times; date table, as in Excel; counts, kg and times get a <code>total</code>, other columns a <code>mean</code>.</p>
+</section>
+
+<section class="k-alert">
+  <h2>Alerts <small>mon$alerts</small></h2>
+  <table>
+    <tr><th>type</th><th>level</th><th>condition (default)</th></tr>
+    <tr><td><code>station_down</code></td><td><span class="tag">danger</span></td><td>no visit at the station all day</td></tr>
+    <tr><td><code>pig_no_visit</code></td><td><span class="tag">danger</span></td><td>a pig seen in the window has no visit that day</td></tr>
+    <tr><td><code>unidentified</code></td><td><span class="tag">warning</span></td><td>unidentified visits &gt; <code>max_unidentified_pct</code> = 5%</td></tr>
+    <tr><td><code>feed_drop</code></td><td><span class="tag">warning</span></td><td>feed intake &gt; <code>max_feed_drop_pct</code> = 30% below the earlier days</td></tr>
+    <tr><td><code>pig_low_feed</code></td><td><span class="tag">warning</span></td><td>a pig ate &lt; <code>low_feed_kg</code> = 0.5 kg that day</td></tr>
+  </table>
+  <ul>
+    <li>Columns: <code>level</code> (danger first), <code>type</code>, <code>location</code>, <code>responder</code>, <code>value</code> (the value that triggered it), <code>message</code>.</li>
+    <li>Pigs at a station that is down get no alert of their own; one <code>station_down</code> alert gives their number.</li>
+  </ul>
+</section>
+
+<section class="k-plot">
+  <h2>Plots <small>plot_monitor(x, type, locations)</small></h2>
+  <table>
+    <tr><th>type</th><th>Content</th></tr>
+    <tr><td><code>"trend"</code></td><td>pigs, visits, unidentified %, occupation, feed, feed per pig and weight by day; the weight band spans the lightest to the heaviest pig, days without visits in red</td></tr>
+    <tr><td><code>"intake"</code></td><td>stacked bars, one colour per pig: share of the day's feed (%) above, feed (kg) below; legend marks <code>[no visit]</code>, <code>[low feed]</code></td></tr>
+    <tr><td><code>"weight"</code></td><td>box plot of the weights of each day, outliers in red</td></tr>
+    <tr><td><code>"hours"</code></td><td>visits, occupation and feed by hour of the last day</td></tr>
+  </table>
+<pre><code>p <- plot_monitor(mon, "trend", locations = "102")
+p$plot[[1]]
+save_monitor_plots(p, "plots", device = "png")
+<span class="c"># files: station_&lt;location&gt;_&lt;type&gt;.png</span></code></pre>
+</section>
+
+<section class="k-out">
+  <h2>HTML report <small>write_monitor_report()</small></h2>
+<pre><code>write_monitor_report(mon, path, title = NULL,
+                     locations = NULL, open = TRUE)</code></pre>
+  <ul>
+    <li>Writes <code>index.html</code> and <code>img/</code>; copy or zip the folder and open it offline.</li>
+    <li>First page: stations, pigs, visits, feed and alerts of the last day, and tables of all stations and houses.</li>
+    <li>Then one page per station: alerts, trend, intake bars, pig table, weight box plot and hours.</li>
+    <li><b>Arrow keys</b> turn the pages; type an ear tag in the search box to jump to its station.</li>
+  </ul>
+</section>
+
+<section class="k-out">
+  <h2>Excel / CSV <small>write_monitor_tables()</small></h2>
+<pre><code><span class="c"># xlsx needs the openxlsx package</span>
+write_monitor_tables(mon, path)
+write_monitor_tables(mon, path, format = "csv")</code></pre>
+  <table>
+    <tr><th>Red means</th><th>Sheets</th></tr>
+    <tr><td>(long tables)</td><td><code>Alerts</code>, <code>Stations</code>, <code>Houses</code>, <code>Pigs</code>, <code>Pig days</code>, as they are</td></tr>
+    <tr><td>low</td><td><code>Visits</code>, <code>Feed kg</code>, <code>Feed per pig kg</code>, <code>Occupation h</code>, <code>Pig feed kg</code></td></tr>
+    <tr><td>high</td><td><code>Unidentified pct</code>, <code>Weight outliers pct</code></td></tr>
+  </table>
+  <p>Wide sheets get a three-colour scale. CSV writes six files (<code>monitor_alerts.csv</code>, &hellip;) with a BOM, so Excel opens them correctly.</p>
+</section>
+
+<section class="k-run">
+  <h2>Run every day <small>schedule_monitor()</small></h2>
+<pre><code>install.packages("taskscheduleR")      <span class="c"># Windows</span>
+schedule_monitor(
+  folder  = "D:/nedap/exports",   <span class="c"># station exports</span>
+  out_dir = "D:/nedap/monitor",   <span class="c"># one folder per day</span>
+  time = "07:30",
+  days = 7, house_width = 1)      <span class="c"># run_monitor() args</span>
+<span class="c"># delete the task</span>
+taskscheduleR::taskscheduler_delete(
+  "tidypptsdm_monitor")</code></pre>
+  <ul>
+    <li>Writes the script <code>tidypptsdm_monitor.R</code> (in <code>out_dir</code>, or <code>script_dir</code>); results go to <code>out_dir/&lt;last day&gt;/</code>.</li>
+    <li>Linux / macOS: prints a crontab line to add with <code>crontab -e</code>.</li>
+    <li><code>register = FALSE</code> only writes the script, to check it or <code>source()</code> it by hand.</li>
+    <li>The whole folder is read each time; move finished batches elsewhere to keep it fast.</li>
+  </ul>
+</section>
+
+<section class="k-run">
+  <h2>From pptsdm 0.1.4</h2>
+  <table>
+    <tr><th>pptsdm</th><th>tidypptsdm</th></tr>
+    <tr><td><code>monitor_all()</code></td><td><code>run_monitor()</code> + <code>write_monitor_report()</code> + <code>write_monitor_tables()</code></td></tr>
+    <tr><td><code>fid_monitor()</code></td><td><code>plot_monitor(type = "intake")</code></td></tr>
+    <tr><td><code>station_monitor()</code></td><td><code>plot_monitor("trend")</code>, <code>("weight")</code></td></tr>
+    <tr><td><code>table_monitor()</code></td><td><code>write_monitor_tables()</code></td></tr>
+    <tr><td><code>monitor_schedule()</code></td><td><code>schedule_monitor()</code></td></tr>
+    <tr><td><code>low_feedintake()</code></td><td><code>status</code> in <code>monitor_pigs()</code></td></tr>
+    <tr><td><code>hour_stat()</code></td><td><code>monitor_hours()</code></td></tr>
+  </table>
+  <p>The old functions are gone; for the old interface use <code>pak::pak("tony2015116/pptsdm@v0.1.4")</code>. Full list in <a href="articles/migrate-zh.html">the migration article</a> (Chinese).</p>
+</section>
+
+</main>
+
+<footer>
+  More in <a href="articles/get-started.html">Get started</a>; in Chinese: <a href="articles/output-zh.html">results</a>, <a href="articles/schedule-zh.html">scheduling</a>. Reading data and the calculations after the test: <a href="https://tony2015116.github.io/tidypptsda/">tidypptsda</a>.
+</footer>
+
+</body>
+</html>
