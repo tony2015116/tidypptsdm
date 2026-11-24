@@ -79,6 +79,21 @@
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Cheatsheet
+
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../cheatsheet.html">中文</a>
+    </li>
+    <li>
+      <a href="../cheatsheet-en.html">English</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -169,12 +184,12 @@
 <span></span>
 <span><span class="va">script</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/schedule_monitor.html">schedule_monitor</a></span><span class="op">(</span><span class="va">folder</span>, <span class="va">out</span>, days <span class="op">=</span> <span class="fl">7</span>, low_feed_kg <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>                           register <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Monitor script written to <span style="color: #0000BB;">/tmp/Rtmp7gBwpS/monitor/tidypptsdm_monitor.R</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Monitor script written to <span style="color: #0000BB;">/tmp/Rtmp2ifzAO/monitor/tidypptsdm_monitor.R</span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">script</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # Written by tidypptsdm::schedule_monitor() on 2026-11-24 06:25</span></span>
+<span><span class="co">#&gt; # Written by tidypptsdm::schedule_monitor() on 2026-11-24 06:28</span></span>
 <span><span class="co">#&gt; # Daily monitor of the testing stations: edit the settings below if needed.</span></span>
-<span><span class="co">#&gt; mon &lt;- tidypptsdm::run_monitor("/tmp/Rtmp7gBwpS/exports", days = 7, low_feed_kg = 0.8)</span></span>
-<span><span class="co">#&gt; out &lt;- file.path("/tmp/Rtmp7gBwpS/monitor", format(mon$settings$end_date))</span></span>
+<span><span class="co">#&gt; mon &lt;- tidypptsdm::run_monitor("/tmp/Rtmp2ifzAO/exports", days = 7, low_feed_kg = 0.8)</span></span>
+<span><span class="co">#&gt; out &lt;- file.path("/tmp/Rtmp2ifzAO/monitor", format(mon$settings$end_date))</span></span>
 <span><span class="co">#&gt; tidypptsdm::write_monitor_report(mon, out)</span></span>
 <span><span class="co">#&gt; tidypptsdm::write_monitor_tables(mon, out, format = "xlsx")</span></span></code></pre></div>
 <p>脚本是普通的 R 代码，参数写在 <code><a href="../reference/run_monitor.html">run_monitor()</a></code>
